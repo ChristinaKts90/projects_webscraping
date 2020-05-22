@@ -15,7 +15,7 @@ class BestMoviesSpider(CrawlSpider):
         yield scrapy.Request(url='https://www.imdb.com/search/title/?groups=top_250&sort=user_rating', headers={
             'User-Agent' : self.user_agent
         })
-
+ 
 
     rules = (
         Rule(LinkExtractor(restrict_xpaths="//h3[@class='lister-item-header']/a"), callback='parse_item', follow=True, process_request='set_user_agent'),
