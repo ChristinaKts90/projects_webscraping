@@ -23,7 +23,7 @@ class CoinSpider(scrapy.Spider):
                 html = splash:html(),
                 png = splash:png(),
             }
-        end
+        end 
 
     '''
 
