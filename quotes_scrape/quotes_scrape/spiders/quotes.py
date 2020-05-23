@@ -5,7 +5,7 @@ from scrapy_splash import SplashRequest
 
 class QuotesSpider(scrapy.Spider):
     name = 'quotes'
-    allowed_domains = ['quotes.toscrape.com/js']
+    allowed_domains = ['quotes.toscrape.com']
 
     script = '''
 
@@ -39,3 +39,9 @@ class QuotesSpider(scrapy.Spider):
                 'Tags': quote.xpath(".//div[@class='tags']/a/text()").getall()
 
             }
+        next_page = response.urljoin(response.xpath("//li[@class='next']/a/@href").get())
+
+        if next_page:
+            yield SplashRequest(url=next_page, callback=self.parse, endpoint="execute", args = {
+               'lua_source': self.script
+            })
