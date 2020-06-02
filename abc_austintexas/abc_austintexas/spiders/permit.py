@@ -34,28 +34,7 @@ class PermitSpider(scrapy.Spider):
 
         self.html = driver.page_source
 
-        #Now i will loop through the permits on this page to get into the link pages
-        # resp1 = Selector(text=driver.page_source)
-        # while resp1.xpath("//a[contains(text(),'next')][1]"):
-        #     for permit_url1 in resp1.xpath("//tbody/tr/td[2]/span"):
-        #         permit_url = f'https://abc.austintexas.gov/{permit_url1.xpath(".//a/@href").get()}'
-        #         #driver.get(permit_url)
-        #         #print(driver.page_source)
-        #         self.all_links.append(permit_url)   
-        #     if len(driver.find_elements_by_xpath("//a[contains(text(),'next')][1]"))>0:
-        #         next_page = driver.find_element_by_xpath("//a[contains(text(),'next')][1]")
-        #         next_page.click()     
-        #         resp2 = Selector(text=driver.page_source)       
-        #     if len(driver.find_elements_by_xpath("//a[contains(text(),'next')][1]"))==0:
-        #     #if resp2.xpath("//a[contains(text(),'next')][1]"):
-        #         print('ALL OK!!!!!!!!!!!!!!!!!!!!!!')   
-
-        #         for permit_url1 in resp2.xpath("//tbody/tr/td[2]/span"):
-        #             permit_url = f'https://abc.austintexas.gov/{permit_url1.xpath(".//a/@href").get()}'
-        #             #driver.get(permit_url)
-        #             #print(driver.page_source)
-        #             self.all_links.append(permit_url)     
-        #         print('ALL OK')      
+    
         resp1 = Selector(text=driver.page_source)
         while resp1.xpath("//a[contains(text(),'next')][1]"):
             self.all_links.append(resp1.xpath("//tbody/tr/td[2]/span/a/@href").getall())
