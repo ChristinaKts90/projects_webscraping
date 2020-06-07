@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapy.exceptions import CloseSpider
 import json
 
 class BooksSpider(scrapy.Spider):
@@ -11,6 +12,10 @@ class BooksSpider(scrapy.Spider):
     page_step = 12
 
     def parse(self, response):
+        if response.status ==500:
+            raise CloseSpider('Reached last page...')
+
+
         resp = json.loads(response.body)
         books = resp.get('works')
 
